@@ -1,4 +1,4 @@
-FROM zammad/zammad-docker-compose:zammad
+FROM zammad/zammad-docker-compose:zammad-3.4.0-4
 RUN \
   apt update && \
   apt install -y wget && \
