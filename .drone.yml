@@ -2,6 +2,11 @@
 kind: pipeline
 name: default
 steps:
+  # - name: ceate tags
+  #   image: alpine
+  #   commands:
+  #     - echo ${DRONE_COMMIT_REF} | awk -F '/' '{print "zammad-legacy-ssl-"$3}' > .tags
+
   - name: docker
     image: plugins/docker
     settings:
@@ -10,7 +15,9 @@ steps:
         from_secret: VH_DOCKER_PASSWORD
       repo: veselahouba/${DRONE_REPO_NAME/_/-}
       tags:
-        - zammad-legacy-ssl-4.1.0-6
+        - zammad-legacy-ssl-${DRONE_TAG}
+      build_args:
+        - VERSION=${DRONE_TAG}
 
   - name: Slack notification
     image: plugins/slack
